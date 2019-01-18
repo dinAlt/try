@@ -1,10 +1,10 @@
 package try
 
-import "github.com/pkg/errors"
+import "errors"
 
 var (
-	ErrEmptyValue = errors.New("Value is empty")
-	ErrWrongType  = errors.New("Value has wrong type")
+	ErrEmptyValue = errors.New("value is empty")
+	ErrWrongType  = errors.New("value has wrong type")
 )
 
 func GetMap(value interface{}) (map[string]interface{}, error) {
@@ -37,7 +37,7 @@ func GetStringsMap(value map[string]interface{}) (map[string]string, error) {
 	for key := range value {
 		v, err := GetString(value[key])
 		if err != nil {
-			return nil, errors.WithStack(err)
+			return nil, err
 		}
 
 		res[key] = v
@@ -51,7 +51,7 @@ func GetInt64Map(value map[string]interface{}) (map[string]int64, error) {
 	for key := range value {
 		v, err := GetInt64(value[key])
 		if err != nil {
-			return nil, errors.WithStack(err)
+			return nil, err
 		}
 
 		res[key] = v
