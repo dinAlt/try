@@ -1,6 +1,9 @@
 package try
 
-import "errors"
+import (
+	"encoding/json"
+	"errors"
+)
 
 var (
 	ErrEmptyValue = errors.New("value is empty")
@@ -143,6 +146,8 @@ func GetInt64(value interface{}) (int64, error) {
 		return int64(*v), nil
 	case float32:
 		return int64(v), nil
+	case json.Number:
+		return v.Int64()
 	}
 
 	return 0, ErrWrongType
@@ -209,7 +214,8 @@ func GetFloat64(value interface{}) (float64, error) {
 		return float64(*v), nil
 	case int64:
 		return float64(v), nil
-
+	case json.Number:
+		return v.Float64()
 	}
 
 	return 0, ErrWrongType
