@@ -134,14 +134,14 @@ func GetInt64(value interface{}) (int64, error) {
 		return int64(v), nil
 	case *float64:
 		if v == nil {
-			return 0, nil
+			return 0, ErrEmptyValue
 		}
 		return int64(*v), nil
 	case float64:
 		return int64(v), nil
 	case *float32:
 		if v == nil {
-			return 0, nil
+			return 0, ErrEmptyValue
 		}
 		return int64(*v), nil
 	case float32:
